@@ -41,7 +41,7 @@ function drawTrebuchet(v, res) {
   const L1px = Math.min(v.L1 * scale, 110);
   const L2px = Math.min(v.L2 * scale, 60);
   const Lspx = Math.min(v.Ls * scale, 45);
-  const angle1 = -0.85;
+  const angle1 = -v.thetaR * Math.PI / 180;
   const arm1ex = pivotX + L1px * Math.cos(angle1);
   const arm1ey = pivotY + L1px * Math.sin(angle1);
   const arm2ex = pivotX - L2px * Math.cos(angle1);

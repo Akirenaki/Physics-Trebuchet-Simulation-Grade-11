@@ -67,6 +67,11 @@ h1 {
   gap: 8px;
   display: grid;
 }
+.ctrl-row.ctrl-action {
+  grid-column: span 2;
+  align-items: center;
+  justify-items: center;
+}
 .ctrl-label {
   font-size: 0.86rem;
   color: var(--color-text-secondary);
@@ -84,14 +89,30 @@ input[type=range] {
   accent-color: var(--color-accent);
   height: 24px;
 }
+button {
+  width: 100%;
+  background: #202020;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+button:hover {
+  background: #111111;
+  transform: translateY(-1px);
+}
 .results-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .metric {
-  background: rgba(239, 124, 172, 0.20);
+  background: rgba(239, 124, 172, 0.16);
   border-radius: var(--border-radius-md);
   padding: 16px 14px;
-  border: 1px solid rgba(239, 124, 172, 0.35);
+  border: 1px solid rgba(239, 124, 172, 0.30);
   box-shadow: var(--shadow-soft);
 }
 .metric-label {

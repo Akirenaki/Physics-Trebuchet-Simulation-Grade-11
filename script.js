@@ -1,5 +1,13 @@
 const g = 9.81;
 let chart = null;
+const defaultConfig = {
+  M: 0.022,
+  m: 0.0025,
+  L1: 0.2,
+  L2: 0.12,
+  Ls: 0.1,
+  thetaR: 45
+};
 
 function getVals() {
   return {
@@ -10,6 +18,16 @@ function getVals() {
     Ls: +document.getElementById('sLs').value,
     thetaR: +document.getElementById('sTr').value
   };
+}
+
+function resetDefaults() {
+  document.getElementById('sM').value = defaultConfig.M;
+  document.getElementById('sm').value = defaultConfig.m;
+  document.getElementById('sL1').value = defaultConfig.L1;
+  document.getElementById('sL2').value = defaultConfig.L2;
+  document.getElementById('sLs').value = defaultConfig.Ls;
+  document.getElementById('sTr').value = defaultConfig.thetaR;
+  update();
 }
 
 function compute(v) {
@@ -50,27 +68,26 @@ function drawTrebuchet(v, res) {
   const projR = Math.min(3 + (v.m / 2) * 5, 8);
   const slingTipX = arm1ex + Lspx * Math.sin(0.4);
   const slingTipY = arm1ey + Lspx * Math.cos(0.4);
-  const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
-  const frameCol = isDark ? '#888780' : '#5F5E5A';
-  const textCol = isDark ? '#B4B2A9' : '#5F5E5A';
-  const slingCol = isDark ? '#B4B2A9' : '#888780';
+  const frameCol = '#202020';
+  const armCol = '#00a075';
+  const textCol = '#202020';
+  const slingCol = '#202020';
 
   svg.innerHTML = `
     <line x1="${cx-55}" y1="${groundY}" x2="${cx+55}" y2="${groundY}" stroke="${frameCol}" stroke-width="2" stroke-linecap="round"/>
     <line x1="${cx-40}" y1="${groundY}" x2="${pivotX-10}" y2="${pivotY+10}" stroke="${frameCol}" stroke-width="3" stroke-linecap="round"/>
     <line x1="${cx+40}" y1="${groundY}" x2="${pivotX+10}" y2="${pivotY+10}" stroke="${frameCol}" stroke-width="3" stroke-linecap="round"/>
-    <line x1="${cx-40}" y1="${groundY-20}" x2="${cx+40}" y2="${groundY-20}" stroke="${frameCol}" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-    <line x1="${arm1ex}" y1="${arm1ey}" x2="${arm2ex}" y2="${arm2ey}" stroke="${frameCol}" stroke-width="5" stroke-linecap="round"/>
-    <line x1="${arm1ex}" y1="${arm1ey}" x2="${arm2ex}" y2="${arm2ey}" stroke="${isDark?'#444441':'#D3D1C7'}" stroke-width="2" stroke-linecap="round"/>
-    <circle cx="${pivotX}" cy="${pivotY}" r="6" fill="#185FA5" stroke="${isDark?'#2C2C2A':'#fff'}" stroke-width="1.5"/>
-    <circle cx="${pivotX}" cy="${pivotY}" r="2.5" fill="${isDark?'#2C2C2A':'#fff'}"/>
-    <rect x="${arm2ex - cwSize/2}" y="${arm2ey}" width="${cwSize}" height="${cwSize*0.9}" rx="3" fill="#3C3489" opacity="0.85"/>
-    <line x1="${arm1ex}" y1="${arm1ey}" x2="${slingTipX}" y2="${slingTipY}" stroke="${slingCol}" stroke-width="1" stroke-dasharray="3 2"/>
-    <circle cx="${slingTipX}" cy="${slingTipY}" r="${projR}" fill="#1D9E75" stroke="${isDark?'#085041':'#9FE1CB'}" stroke-width="1"/>
-    <text x="${arm2ex - cwSize/2 - 4}" y="${arm2ey + cwSize*0.45}" text-anchor="end" font-size="9" fill="${textCol}">${v.M}kg</text>
-    <text x="${slingTipX + projR + 3}" y="${slingTipY + 4}" font-size="9" fill="${textCol}">${v.m}kg</text>
-    <text x="${cx-28}" y="${pivotY-8}" font-size="8" fill="${textCol}">L₁=${v.L1}m</text>
-    <text x="${cx+4}" y="${pivotY-8}" font-size="8" fill="${textCol}">L₂=${v.L2}m</text>
+    <line x1="${cx-40}" y1="${groundY-20}" x2="${cx+40}" y2="${groundY-20}" stroke="${frameCol}" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+    <line x1="${arm1ex}" y1="${arm1ey}" x2="${arm2ex}" y2="${arm2ey}" stroke="${armCol}" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="${pivotX}" cy="${pivotY}" r="6" fill="${armCol}" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="${pivotX}" cy="${pivotY}" r="2.5" fill="#ffffff"/>
+    <rect x="${arm2ex - cwSize/2}" y="${arm2ey}" width="${cwSize}" height="${cwSize*0.9}" rx="3" fill="${armCol}" opacity="0.9"/>
+    <line x1="${arm1ex}" y1="${arm1ey}" x2="${slingTipX}" y2="${slingTipY}" stroke="${slingCol}" stroke-width="2" stroke-dasharray="4 2"/>
+    <circle cx="${slingTipX}" cy="${slingTipY}" r="${projR}" fill="${armCol}" stroke="#202020" stroke-width="1"/>
+    <text x="${arm2ex - cwSize/2 - 4}" y="${arm2ey + cwSize*0.45}" text-anchor="end" font-size="9" fill="${textCol}">${v.M.toFixed(3)}kg</text>
+    <text x="${slingTipX + projR + 3}" y="${slingTipY + 4}" font-size="9" fill="${textCol}">${v.m.toFixed(4)}kg</text>
+    <text x="${cx-28}" y="${pivotY-8}" font-size="8" fill="${textCol}">L₁=${v.L1.toFixed(2)}m</text>
+    <text x="${cx+4}" y="${pivotY-8}" font-size="8" fill="${textCol}">L₂=${v.L2.toFixed(2)}m</text>
     ${res ? `<text x="10" y="20" font-size="8" fill="${textCol}">v₀=${res.v0.toFixed(1)}m/s</text><text x="10" y="32" font-size="8" fill="${textCol}">θ=${v.thetaR}°</text>` : ''}
   `;
 }
@@ -85,13 +102,12 @@ function drawTrajectory(v, res) {
     const t = (i / 60) * res.T_flight;
     pts.push({ x: parseFloat((vx * t).toFixed(2)), y: parseFloat((vy * t - 0.5 * g * t * t).toFixed(2)) });
   }
-  const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
-  const labelColor = isDark ? '#888780' : '#5F5E5A';
-  const gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)';
+  const labelColor = '#202020';
+  const gridColor = 'rgba(32,32,32,0.18)';
   if (chart) { chart.destroy(); chart = null; }
   chart = new Chart(canvas, {
     type: 'scatter',
-    data: { datasets: [{ label: 'Trajectory', data: pts, showLine: true, borderColor: '#185FA5', backgroundColor: 'transparent', pointRadius: 0, borderWidth: 2, tension: 0.3 }] },
+    data: { datasets: [{ label: 'Trajectory', data: pts, showLine: true, borderColor: '#00a075', backgroundColor: 'transparent', pointRadius: 0, borderWidth: 3, tension: 0.35 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
@@ -135,4 +151,5 @@ function update() {
 }
 
 ['sM','sm','sL1','sL2','sLs','sTr'].forEach(id => document.getElementById(id).addEventListener('input', update));
+document.getElementById('resetBtn').addEventListener('click', resetDefaults);
 update();

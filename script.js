@@ -6,7 +6,8 @@ const defaultConfig = {
   L1: 0.2,
   L2: 0.12,
   Ls: 0.1,
-  thetaR: 45
+  thetaR: 45,
+  pivotH: 0.3
 };
 
 function getVals() {
@@ -53,19 +54,22 @@ function compute(v) {
 
 function drawTrebuchet(v, res) {
   const svg = document.getElementById('tsvg');
-  const cx = 150, groundY = 190, pivotH = 100, pivotX = cx;
-  const pivotY = groundY - pivotH;
-  const scale = 60;
-  const L1px = Math.min(v.L1 * scale, 110);
-  const L2px = Math.min(v.L2 * scale, 60);
-  const Lspx = Math.min(v.Ls * scale, 45);
+  const cx = 150, groundY = 190, pivotX = cx;
+  const pivotPx = 100;
+  const pivotY = groundY - pivotPx;
+  const scale = 80;
+  const minArmPx = 24;
+  const minSlingPx = 18;
+  const L1px = Math.max(Math.min(v.L1 * scale, 110), minArmPx);
+  const L2px = Math.max(Math.min(v.L2 * scale, 60), minArmPx * 0.6);
+  const Lspx = Math.max(Math.min(v.Ls * scale, 45), minSlingPx);
   const angle1 = -v.thetaR * Math.PI / 180;
   const arm1ex = pivotX + L1px * Math.cos(angle1);
   const arm1ey = pivotY + L1px * Math.sin(angle1);
   const arm2ex = pivotX - L2px * Math.cos(angle1);
   const arm2ey = pivotY - L2px * Math.sin(angle1);
-  const cwSize = Math.min(6 + (v.M / 50) * 18, 24);
-  const projR = Math.min(3 + (v.m / 2) * 5, 8);
+  const cwSize = Math.max(Math.min(6 + (v.M / 50) * 18, 24), 8);
+  const projR = Math.max(Math.min(3 + (v.m / 2) * 5, 8), 4);
   const slingTipX = arm1ex + Lspx * Math.sin(0.4);
   const slingTipY = arm1ey + Lspx * Math.cos(0.4);
   const frameCol = '#202020';

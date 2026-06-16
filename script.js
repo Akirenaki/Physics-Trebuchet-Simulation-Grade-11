@@ -105,9 +105,9 @@ function drawTrajectory(v, res) {
 
 function update() {
   const v = getVals();
-  document.getElementById('lM').textContent = v.M + ' kg';
-  document.getElementById('lm').textContent = v.m.toFixed(2) + ' kg';
-  document.getElementById('lL1').textContent = v.L1.toFixed(1) + ' m';
+  document.getElementById('lM').textContent = v.M.toFixed(3) + ' kg';
+  document.getElementById('lm').textContent = v.m.toFixed(4) + ' kg';
+  document.getElementById('lL1').textContent = v.L1.toFixed(2) + ' m';
   document.getElementById('lL2').textContent = v.L2.toFixed(2) + ' m';
   document.getElementById('lLs').textContent = v.Ls.toFixed(2) + ' m';
   document.getElementById('lTr').textContent = v.thetaR + '°';

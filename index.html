@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trebuchet Physics Simulation</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trebuchet Physics Simulation</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Trebuchet Physics Simulation</h1>
-<p class="subtitle">Proyek Fisika SMA — Kelompok 5 &nbsp;|&nbsp; Adjust variables to see live physics results</p>
+  <h1>Trebuchet Physics Simulation</h1>
+  <p class="subtitle">Proyek Fisika Trebuset — Kelompok 5 &nbsp;|&nbsp; Adjust variables to see live physics results</p>
 
-<div class="controls">
-  <div class="ctrl-row">
-    <div class="ctrl-label">Counterweight mass M <span id="lM">15 kg</span></div>
-    <input type="range" id="sM" min="1" max="50" value="15" step="1">
+  <div class="controls">
+    <div class="ctrl-row">
+      <div class="ctrl-label">Counterweight mass M <span id="lM">15.000 kg</span></div>
+      <input type="range" id="sM" min="0.001" max="50" value="15" step="0.001">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Projectile mass m <span id="lm">0.1000 kg</span></div>
+      <input type="range" id="sm" min="0.0001" max="2" value="0.1" step="0.0001">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Long arm L₁ <span id="lL1">1.20 m</span></div>
+      <input type="range" id="sL1" min="0.10" max="2.5" value="1.2" step="0.01">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Short arm L₂ <span id="lL2">0.30 m</span></div>
+      <input type="range" id="sL2" min="0.01" max="1.0" value="0.3" step="0.01">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Sling length L_s <span id="lLs">0.50 m</span></div>
+      <input type="range" id="sLs" min="0.01" max="1.5" value="0.5" step="0.01">
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Release pin angle θ_r <span id="lTr">45°</span></div>
+      <input type="range" id="sTr" min="20" max="80" value="45" step="1">
+    </div>
   </div>
-  <div class="ctrl-row">
-    <div class="ctrl-label">Projectile mass m <span id="lm">0.10 kg</span></div>
-    <input type="range" id="sm" min="0.05" max="2" value="0.1" step="0.05">
-  </div>
-  <div class="ctrl-row">
-    <div class="ctrl-label">Long arm L₁ <span id="lL1">1.2 m</span></div>
-    <input type="range" id="sL1" min="0.4" max="2.5" value="1.2" step="0.1">
-  </div>
-  <div class="ctrl-row">
-    <div class="ctrl-label">Short arm L₂ <span id="lL2">0.30 m</span></div>
-    <input type="range" id="sL2" min="0.1" max="1.0" value="0.3" step="0.05">
-  </div>
-  <div class="ctrl-row">
-    <div class="ctrl-label">Sling length L_s <span id="lLs">0.50 m</span></div>
-    <input type="range" id="sLs" min="0.1" max="1.5" value="0.5" step="0.05">
-  </div>
-  <div class="ctrl-row">
-    <div class="ctrl-label">Release pin angle θ_r <span id="lTr">45°</span></div>
-    <input type="range" id="sTr" min="20" max="80" value="45" step="1">
-  </div>
-</div>
 
-<div class="results-grid">
-  <div class="metric"><div class="metric-label">Launch speed v₀</div><div class="metric-value"><span id="rv0">--</span> <span class="metric-unit">m/s</span></div></div>
-  <div class="metric"><div class="metric-label">Launch angle θ</div><div class="metric-value"><span id="rth">--</span> <span class="metric-unit">°</span></div></div>
-  <div class="metric"><div class="metric-label">Range R</div><div class="metric-value"><span id="rR">--</span> <span class="metric-unit">m</span></div></div>
-  <div class="metric"><div class="metric-label">Max height H</div><div class="metric-value"><span id="rH">--</span> <span class="metric-unit">m</span></div></div>
-  <div class="metric"><div class="metric-label">Time of flight T</div><div class="metric-value"><span id="rT">--</span> <span class="metric-unit">s</span></div></div>
-  <div class="metric"><div class="metric-label">Energy efficiency η</div><div class="metric-value"><span id="rEff">--</span> <span class="metric-unit">%</span></div></div>
-</div>
+  <div class="results-grid">
+    <div class="metric"><div class="metric-label">Launch speed v₀</div><div class="metric-value"><span id="rv0">--</span> <span class="metric-unit">m/s</span></div></div>
+    <div class="metric"><div class="metric-label">Launch angle θ</div><div class="metric-value"><span id="rth">--</span> <span class="metric-unit">°</span></div></div>
+    <div class="metric"><div class="metric-label">Range R</div><div class="metric-value"><span id="rR">--</span> <span class="metric-unit">m</span></div></div>
+    <div class="metric"><div class="metric-label">Max height H</div><div class="metric-value"><span id="rH">--</span> <span class="metric-unit">m</span></div></div>
+    <div class="metric"><div class="metric-label">Time of flight T</div><div class="metric-value"><span id="rT">--</span> <span class="metric-unit">s</span></div></div>
+    <div class="metric"><div class="metric-label">Energy efficiency η</div><div class="metric-value"><span id="rEff">--</span> <span class="metric-unit">%</span></div></div>
+  </div>
 
-<div class="panels">
-  <div class="panel">
-    <div class="panel-title">Trebuchet diagram</div>
-    <svg id="tsvg" width="100%" viewBox="0 0 300 220"></svg>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-title">Trebuchet diagram</div>
+      <svg id="tsvg" width="100%" viewBox="0 0 300 220"></svg>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Trajectory graph</div>
+      <div style="position:relative;height:190px"><canvas id="traj" role="img" aria-label="Projectile trajectory parabola"></canvas></div>
+    </div>
   </div>
-  <div class="panel">
-    <div class="panel-title">Trajectory graph</div>
-    <div style="position:relative;height:190px"><canvas id="traj" role="img" aria-label="Projectile trajectory parabola"></canvas></div>
-  </div>
-</div>
 
-<div class="formulae">
-  <div class="formula-row">
-    <span class="f-name">Torque (Bab 2)<span class="chapter-tag c2">τ</span></span>
-    <span class="f-eq">τ = M·g·L₂ − m·g·L₁</span>
-    <span class="f-val" id="fTau">-- N·m</span>
+  <div class="formulae">
+    <div class="formula-row">
+      <span class="f-name">Torque (Bab 2)<span class="chapter-tag c2">τ</span></span>
+      <span class="f-eq">τ = M·g·L₂ − m·g·L₁</span>
+      <span class="f-val" id="fTau">-- N·m</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Arm ω (Bab 2)<span class="chapter-tag c2">ω</span></span>
+      <span class="f-eq">ω = √(2·τ·θ_swing / I)</span>
+      <span class="f-val" id="fOmega">-- rad/s</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Sling T (Bab 7)<span class="chapter-tag c7">T</span></span>
+      <span class="f-eq">T_sling = 2π√(L_s/g)</span>
+      <span class="f-val" id="fTsling">-- s</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Launch speed (Bab 3)<span class="chapter-tag c3">v₀</span></span>
+      <span class="f-eq">v₀ = ω·(L₁ + L_s)</span>
+      <span class="f-val" id="fV0">-- m/s</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Momentum (Bab 1)<span class="chapter-tag c1">p</span></span>
+      <span class="f-eq">J = Δp = m·v₀</span>
+      <span class="f-val" id="fImpulse">-- N·s</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Range (Bab 0)<span class="chapter-tag c0">R</span></span>
+      <span class="f-eq">R = v₀²·sin(2θ)/g</span>
+      <span class="f-val" id="fRange">-- m</span>
+    </div>
+    <div class="formula-row">
+      <span class="f-name">Energy eff. (Bab 3)<span class="chapter-tag c3">η</span></span>
+      <span class="f-eq">η = ½mv₀² / (M·g·L₂·θ_swing)</span>
+      <span class="f-val" id="fEta">-- %</span>
+    </div>
   </div>
-  <div class="formula-row">
-    <span class="f-name">Arm ω (Bab 2)<span class="chapter-tag c2">ω</span></span>
-    <span class="f-eq">ω = √(2·τ·θ_swing / I)</span>
-    <span class="f-val" id="fOmega">-- rad/s</span>
-  </div>
-  <div class="formula-row">
-    <span class="f-name">Sling T (Bab 7)<span class="chapter-tag c7">T</span></span>
-    <span class="f-eq">T_sling = 2π√(L_s/g)</span>
-    <span class="f-val" id="fTsling">-- s</span>
-  </div>
-  <div class="formula-row">
-    <span class="f-name">Launch speed (Bab 3)<span class="chapter-tag c3">v₀</span></span>
-    <span class="f-eq">v₀ = ω·(L₁ + L_s)</span>
-    <span class="f-val" id="fV0">-- m/s</span>
-  </div>
-  <div class="formula-row">
-    <span class="f-name">Momentum (Bab 1)<span class="chapter-tag c1">p</span></span>
-    <span class="f-eq">J = Δp = m·v₀</span>
-    <span class="f-val" id="fImpulse">-- N·s</span>
-  </div>
-  <div class="formula-row">
-    <span class="f-name">Range (Bab 0)<span class="chapter-tag c0">R</span></span>
-    <span class="f-eq">R = v₀²·sin(2θ)/g</span>
-    <span class="f-val" id="fRange">-- m</span>
-  </div>
-  <div class="formula-row">
-    <span class="f-name">Energy eff. (Bab 3)<span class="chapter-tag c3">η</span></span>
-    <span class="f-eq">η = ½mv₀² / (M·g·L₂·θ_swing)</span>
-    <span class="f-val" id="fEta">-- %</span>
-  </div>
-</div>
 
-<p class="note">
-  <strong>Chapters included:</strong> Bab 0 (Gerak Parabola), Bab 1 (Momentum &amp; Impuls), Bab 2 (Torsi &amp; Rotasi), Bab 3 (Energi), Bab 7 (Getaran Harmonik / Sling).<br>
-  <strong>Chapters removed:</strong> Bab 4 (Fluida Statis) and Bab 5 (Fluida Dinamis/Bernoulli) — negligible effect on small dense projectiles; would require shape-specific aerodynamic parameters beyond scope of this simulation.
-</p>
+  <p class="note">
+    <strong>Chapters included:</strong> Bab 0 (Gerak Parabola), Bab 1 (Momentum &amp; Impuls), Bab 2 (Torsi &amp; Rotasi), Bab 3 (Energi), Bab 7 (Getaran Harmonik / Sling).<br>
+    <strong>Chapters removed:</strong> Bab 4 (Fluida Statis) and Bab 5 (Fluida Dinamis/Bernoulli) — negligible effect on small dense projectiles; would require shape-specific aerodynamic parameters beyond scope of this simulation.
+  </p>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

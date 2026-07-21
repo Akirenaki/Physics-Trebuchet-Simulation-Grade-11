@@ -10,7 +10,7 @@ This interactive simulation was developed to analyze the mechanics of a trebuche
 - **Dynamic Physics Engine:** Real-time calculation of Torque ($\tau$), Moment of Inertia ($I$), and Angular Velocity ($\omega$).
 - **Interactive Controls:** Adjust counterweight mass, projectile mass, arm lengths, and release angles.
 - **Trajectory Mapping:** Visualizes the flight path using Chart.js based on kinematic equations.
-- **Project Report Integration:** Includes data relevant to "Bab 3: Hasil dan Pembahasan" for our physics project.
+- **Project Report Integration:** Includes relevant data.
 
 ## 📚 Physics Formulas Used
 This simulation uses the following core principles:

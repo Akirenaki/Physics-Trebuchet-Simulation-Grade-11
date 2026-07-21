@@ -28,12 +28,12 @@ This simulation uses the following core principles:
 - `style.css` : Contains the physics and logic.
 - `README.md`: Project documentation.
 
-## 👥 Kelompok 5 Members
-- Aisya Awliya R / 1
-- Areta Anindha H / 8
-- Daini Arina Safiy D / 12
-- Putri Utari K / 30
-- R B Narendra (me) T A M / 31
+## 👥 Designed by
+- Aisya Awliya R
+- Areta Anindha H
+- Daini Arina Safiy D
+- Putri Utari K
+- Raden Bagus Narendra Tsaqiif Aryasuta Maldini (Renee Astraea)
 
 ---
 
